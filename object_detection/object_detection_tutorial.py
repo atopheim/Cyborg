@@ -6,10 +6,6 @@
 
 # # Imports
 
-# In[25]:
-
-
-
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -141,8 +137,8 @@ TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(
 #TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'irises.jpg')]
 print(TEST_IMAGE_PATHS)
 
-# Size, in inches, of the output images.
-IMAGE_SIZE = (12, 8)
+# Size, in pixels, of the output images.
+IMAGE_SIZE = (1024, 636)
 
 
 # In[40]:
@@ -220,4 +216,32 @@ for image_path in TEST_IMAGE_PATHS:
       line_thickness=8)
   plt.figure(figsize=IMAGE_SIZE)
   plt.imshow(image_np)
+
+####################################
+#	Configure here		   #
+####################################
+
+threshold = 0.8
+max_objects = 10
+valid_boxes = []
+picture_size_x = 1024
+picture_size_y = 636
+
+
+####################################
+
+for i in range(max_objects):
+  if output_dict['detection_scores'][i] > threshold:
+    valid_boxes.append(output_dict['detection_boxes'][i])
+
+midpoints = []
+num_boxes = len(valid_boxes)
+for i in range(num_boxes):
+  x = valid_boxes[i][3] - valid_boxes[i][1]
+  y = valid_boxes[i][2] - valid_boxes[i][0]
+  midpoints.append([(x/2)*picture_size_x,(y/2)*picture_size_y])
+for element in midpoints:
+  i = 1
+  print("Object",i," -->  X position ",element[0],"Y position: ",element[1])
+  i += 1
 
