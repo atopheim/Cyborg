@@ -20,7 +20,8 @@ class image_retriever:
 		image = np.fromstring(ros_data.data, np.uint8)
 		image = image.reshape((720, 1280, 3))
 		cv2.imshow("image", image)
-		cv2.imwrite(r"/home/nvidia/ZED.jpg", image)
+		#cv2.imwrite(r"/home/nvidia/ZED.jpg", image)
+		#np.save('rgb', image)
 		cv2.waitKey(35)
 
 def main(args):

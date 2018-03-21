@@ -20,7 +20,8 @@ class image_retriever:
 		image = np.fromstring(ros_data.data, np.uint8)
 		image = image.reshape((720, 1280, 4))
 		cv2.imshow("image", image)
-		#cv2.imwrite(r"/home/nvidia/ZED.jpg", image)
+		#cv2.imwrite(r"/home/nvidia/ZED_Depth.jpg", image)
+		#np.save('depth', image)
 		cv2.waitKey(35)
 
 def main(args):
